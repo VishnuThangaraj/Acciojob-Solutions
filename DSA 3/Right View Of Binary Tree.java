@@ -1,0 +1,115 @@
+import java.util.LinkedList; 
+import java.util.Queue; 
+import java.io.*;
+import java.util.*;
+
+//https://course.acciojob.com/idle?question=21d3de29-2828-4145-8aa5-c9d8ab42ee78
+
+class Node{
+    int data;
+    Node left;
+    Node right;
+    Node(int data){
+        this.data = data;
+        left=null;
+        right=null;
+    }
+}
+
+
+class Main {
+    static Node buildTree(String str){
+        if(str.length()==0 || str.charAt(0)=='N'){
+            return null;
+        }
+        String ip[] = str.split(" ");
+        Node root = new Node(Integer.parseInt(ip[0]));
+        Queue<Node> queue = new LinkedList<>(); 
+        queue.add(root);
+        int i = 1;
+        while(queue.size()>0 && i < ip.length) {
+            Node currNode = queue.peek();
+            queue.remove();
+            String currVal = ip[i];
+            if(!currVal.equals("N")) {
+                currNode.left = new Node(Integer.parseInt(currVal));
+                queue.add(currNode.left);
+            }
+            i++;
+            if(i >= ip.length)
+                break;   
+            currVal = ip[i];
+            if(!currVal.equals("N")) {
+                currNode.right = new Node(Integer.parseInt(currVal));
+                queue.add(currNode.right);
+            }
+            i++;
+        }
+        return root;
+    }
+    void inOrder(Node node) {
+        if (node == null) {
+            return;
+        }
+        inOrder(node.left);
+        System.out.print(node.data + " ");
+        inOrder(node.right);
+    }
+    
+	public static void main (String[] args) throws IOException{
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		int t=Integer.parseInt(br.readLine());
+		while(t-- > 0){
+			String s = br.readLine();
+			Node root = buildTree(s);
+			Solution tree = new Solution();
+			ArrayList<Integer> arr = tree.rightView(root);
+			for(int x : arr)
+			System.out.print(x +" ");
+			System.out.println();  
+		}
+	}
+}
+  
+
+
+class Solution{
+    ArrayList<Integer> rightView(Node root) {
+		//list to store the result
+        ArrayList<Integer> result = new ArrayList<>();
+
+        if(root == null){
+            return result; //empty tree
+        }
+
+        //create a queue to store the treeNodes
+        Queue<Node> storage = new LinkedList<>();
+
+        //add the root to queue
+        storage.offer(root);
+
+        while(!storage.isEmpty()){
+            int queueSize = storage.size();
+
+            //run loop to queue size times
+            for(int i=0; i<queueSize; i++){
+                Node parent = storage.remove();
+
+                if(i == queueSize-1){ //right most in the current level
+                    result.add(parent.data);
+                }
+
+                //add left and right nodes to the queue
+                if(parent.left!=null){
+                    storage.offer(parent.left);
+                }
+                if(parent.right!=null){
+                    storage.offer(parent.right);
+                }
+            }
+        }
+        return result;
+	
+    }
+}
+
