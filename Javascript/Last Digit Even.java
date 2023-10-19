@@ -1,3 +1,5 @@
+// https://course.acciojob.com/idle?question=5ac510c5-b933-4d12-a779-c14777282b70
+
 function check_last_digit(nums) {
 	let last_digit = nums%10;
 
