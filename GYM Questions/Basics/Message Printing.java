@@ -1,4 +1,6 @@
 // https://course.acciojob.com/idle?question=b712e2e9-44ba-4888-844e-873920e233cc
+// https://course.acciojob.com/idle?question=99c741fd-3eb0-4fe0-a439-9cf38101c08d
+// https://course.acciojob.com/idle?question=146f954b-51fe-43ee-b705-a1ba870fcce6
 
 import java.util.*;
 class Main
