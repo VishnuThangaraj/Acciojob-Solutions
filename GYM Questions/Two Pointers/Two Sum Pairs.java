@@ -6,7 +6,6 @@ public class Main {
 
     public static List<List<Integer>> twoSum(int[] arr, int target) {
       List<List<Integer>> result = new ArrayList<>();
-        HashSet<Integer> storage = new HashSet<>();
         Arrays.sort(arr); // Sort the Array
         
         int first = 0, second = arr.length-1; //Two-Pointers
